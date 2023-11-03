@@ -38,40 +38,35 @@ function getComputerChoice(){
 //single play-round game function
 function singleRound(computerSelection, playerSelection){
 
-   
+    const txtdiv = document.querySelector('#txt');
+    const para = document.createElement('p');
+    para.textContent = '';
+
+    //clear the existing content of txtdiv
+    txtdiv.innerHTML = '';
     
 
     if (computerSelection === playerSelection) {
-
-
-        const txtdiv = document.querySelector('#txt');
-
-        const para = document.createElement('p');
+        
         para.textContent = 'you tie computer: ' + computerSelection + ' vs player: ' + playerSelection;
         txtdiv.appendChild(para);
-
+        
         console.log('you tie computer: ' + computerSelection + ' vs player: ' + playerSelection);
     }
     else if(playerSelection === 'rock' && computerSelection === 'scissors' ||
             playerSelection === 'paper' && computerSelection === 'rock' ||
             playerSelection === 'scissors' && computerSelection === 'paper'){
-
-                const txtdiv = document.querySelector('#txt');
-
-                const para = document.createElement('p');
+                
                 para.textContent = 'You win! ' + playerSelection + ' beat ' + computerSelection;
                 txtdiv.appendChild(para);
-
+                
                 console.log('You win! ' + playerSelection + ' beat ' + computerSelection);
                 player++;
-    }else{
-
-        const txtdiv = document.querySelector('#txt');
-
-        const para = document.createElement('p');
+    }else{ 
+             
         para.textContent = 'You losse! ' + computerSelection + ' beat ' + playerSelection;
         txtdiv.appendChild(para);
-
+        
         console.log('You losse! ' + computerSelection + ' beat ' + playerSelection);
         computer++;
     }
