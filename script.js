@@ -1,60 +1,57 @@
-//computer's pick
-function getComputerChoice(){
-    let options = ['rock', 'paper', 'scissors'];
-    let computerSelection = options[Math.floor(Math.random() * options.length)];
-
-    return computerSelection;
-}
+let player = 0;
+let computer = 0;
+let playerSelection;
+let computerSelection;
 
 //human's pick
-function getHumanChoise(){
-    let playerSelection = prompt('Pick an option: Rock, Paper, Scissors').toLocaleLowerCase();
+function getPlayerChoise(){
 
-    return playerSelection;
-}
-
-
-
-
-//five rounds-play game function
-function game(){
+    const rockBtn = document.querySelector('#rock');
+    const paperBtn = document.querySelector('#paper');
+    const scissorsBtn = document.querySelector('#scissors');
     
+    function handleButtonClick(choice){
+        playerSelection = choice;
+        console.log(playerSelection);
+        
 
-    let player = 0;
-    let computer = 0;
-
-    while(player < 5 || computer < 5){
-        singleRound(getComputerChoice(), getHumanChoise());
-        if(player == 4){
-            console.log('You win!');
-            break;
-        }else if (computer == 4){
-            console.log('You lose!');
-            break;
-        }
+        getComputerChoice();
+        singleRound(playerSelection, computerSelection);
     }
 
-    //single play-round game function
-    function singleRound(computerSelection, playerSelection){
-        if (computerSelection === playerSelection) {
-            console.log('you tie computer: ' + computerSelection + ' vs player: ' + playerSelection);
-            alert('player: 0 computer: 0');
-        }
-        else if(playerSelection === 'rock' && computerSelection === 'scissors' ||
-                playerSelection === 'paper' && computerSelection === 'rock' ||
-                playerSelection === 'scissors' && computerSelection === 'rock'){
-                    console.log('You win! ' + playerSelection + ' beat ' + computerSelection);
-                    alert('player: 1 computer: 0');
-                    player++;
-        }
-        else{
-            console.log('You losse! ' + computerSelection + ' beat ' + playerSelection);
-            alert('player: 0 computer: 1');
-            computer++;
-        }
-    }
+    rockBtn.addEventListener('click', () => handleButtonClick('rock'));
+    paperBtn.addEventListener('click', () => handleButtonClick('paper'));
+    scissorsBtn.addEventListener('click', () => handleButtonClick('scissors'));
+};
 
+
+//computer's pick
+function getComputerChoice(){
+    const options = ['rock', 'paper', 'scissors'];
+    computerSelection = options[Math.floor(Math.random() * options.length)];
+
+    console.log(computerSelection);
 }
 
-game();
-                        
+
+
+//single play-round game function
+function singleRound(computerSelection, playerSelection){
+    if (computerSelection === playerSelection) {
+        console.log('you tie computer: ' + computerSelection + ' vs player: ' + playerSelection);
+    }
+    else if(playerSelection === 'rock' && computerSelection === 'scissors' ||
+            playerSelection === 'paper' && computerSelection === 'rock' ||
+            playerSelection === 'scissors' && computerSelection === 'rock'){
+                console.log('You win! ' + playerSelection + ' beat ' + computerSelection);
+                player++;
+    }
+    else{
+        console.log('You losse! ' + computerSelection + ' beat ' + playerSelection);
+        computer++;
+    }
+}
+
+getPlayerChoise();
+
+
