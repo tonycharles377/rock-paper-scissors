@@ -17,6 +17,7 @@ function getPlayerChoise(){
 
         getComputerChoice();
         singleRound(computerSelection, playerSelection);
+        getWiner();
     }
 
     rockBtn.addEventListener('click', () => handleButtonClick('rock'));
@@ -41,6 +42,8 @@ function singleRound(computerSelection, playerSelection){
     const txtdiv = document.querySelector('#txt');
     const para = document.createElement('p');
     para.textContent = '';
+    const para2 = document.createElement('p');
+    para2.textContent = '';
 
     //clear the existing content of txtdiv
     txtdiv.innerHTML = '';
@@ -50,8 +53,10 @@ function singleRound(computerSelection, playerSelection){
         
         para.textContent = 'you tie computer: ' + computerSelection + ' vs player: ' + playerSelection;
         txtdiv.appendChild(para);
+
+        para2.textContent = 'Player score: ' + player + '   Computer score: ' + computer;
+        txtdiv.appendChild(para2);
         
-        console.log('you tie computer: ' + computerSelection + ' vs player: ' + playerSelection);
     }
     else if(playerSelection === 'rock' && computerSelection === 'scissors' ||
             playerSelection === 'paper' && computerSelection === 'rock' ||
@@ -60,16 +65,59 @@ function singleRound(computerSelection, playerSelection){
                 para.textContent = 'You win! ' + playerSelection + ' beat ' + computerSelection;
                 txtdiv.appendChild(para);
                 
-                console.log('You win! ' + playerSelection + ' beat ' + computerSelection);
                 player++;
+                para2.textContent = 'Player score: ' + player + '   Computer score: ' + computer;
+                txtdiv.appendChild(para2);
     }else{ 
              
         para.textContent = 'You losse! ' + computerSelection + ' beat ' + playerSelection;
         txtdiv.appendChild(para);
         
-        console.log('You losse! ' + computerSelection + ' beat ' + playerSelection);
         computer++;
+        para2.textContent = 'Player score: ' + player + '   Computer score: ' + computer;
+        txtdiv.appendChild(para2);
     }
 }
+
+
+function getWiner(){
+    if(player == 5){
+        const popup = document.querySelector('#popup');
+        const para = document.createElement('p');
+        para.textContent = 'You Win! Play again';
+        popup.prepend(para);
+        openpopup();
+
+        const closebtn = popup.querySelector('#closebtn');
+
+        closebtn.addEventListener('click', () =>{
+            closepopup();
+        })
+    }
+    if(computer == 5){
+        const popup = document.querySelector('#popup');
+        const para = document.createElement('p');
+        para.textContent = 'You lose! Try again';
+        popup.prepend(para);
+        openpopup();
+
+        const closebtn = popup.querySelector('#closebtn');
+
+        closebtn.addEventListener('click', () =>{
+            closepopup();
+        })
+    }
+}
+
+function openpopup(){
+    const popup = document.querySelector('#popup');
+    popup.classList.add('open-popup');
+}
+
+function closepopup(){
+    const popup = document.querySelector('#popup');
+    popup.classList.remove('open-popup');
+}
+
 
 getPlayerChoise();
