@@ -42,6 +42,7 @@ function singleRound(computerSelection, playerSelection){
     const txtdiv = document.querySelector('#txt');
     const para = document.createElement('p');
     para.textContent = '';
+    txtdiv.appendChild(para);
     const para2 = document.createElement('p');
     para2.textContent = '';
 
@@ -51,7 +52,7 @@ function singleRound(computerSelection, playerSelection){
 
     if (computerSelection === playerSelection) {
         
-        para.textContent = 'you tie computer: ' + computerSelection + ' vs player: ' + playerSelection;
+        para.textContent = "It's a tie";
         txtdiv.appendChild(para);
 
         para2.textContent = 'Player score: ' + player + '   Computer score: ' + computer;
@@ -87,11 +88,18 @@ function getWiner(){
         para.textContent = 'You Win! Play again';
         popup.prepend(para);
         openpopup();
+        toggle();
 
         const closebtn = popup.querySelector('#closebtn');
 
         closebtn.addEventListener('click', () =>{
             closepopup();
+            closetoggle();
+            const txtdiv = document.querySelector('#txt');
+            txtdiv.innerHTML = '';
+            para.remove();
+            player = 0;
+            computer = 0;
         })
     }
     if(computer == 5){
@@ -100,11 +108,18 @@ function getWiner(){
         para.textContent = 'You lose! Try again';
         popup.prepend(para);
         openpopup();
+        toggle();
 
         const closebtn = popup.querySelector('#closebtn');
 
         closebtn.addEventListener('click', () =>{
             closepopup();
+            closetoggle();
+            const txtdiv = document.querySelector('#txt');
+            txtdiv.innerHTML = '';
+            para.remove();
+            player = 0;
+            computer = 0;
         })
     }
 }
@@ -117,6 +132,16 @@ function openpopup(){
 function closepopup(){
     const popup = document.querySelector('#popup');
     popup.classList.remove('open-popup');
+}
+
+function toggle(){
+    const blur = document.querySelector('#blur');
+    blur.classList.add('active');
+}
+
+function closetoggle(){
+    const blur = document.querySelector('#blur');
+    blur.classList.remove('active');
 }
 
 
